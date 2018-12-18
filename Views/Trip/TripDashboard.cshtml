@@ -1,0 +1,31 @@
+@using TravelBuddy.Models
+@using TravelBuddy.HelperModels
+@model TripDashboard
+
+
+<h1>Your Trips</h1>
+
+<br>
+
+
+<br>
+<br>
+
+<span class="addTripForm" class="btn btn-primary">Add a Trip</span>
+<div class="addTrip">
+  <form action="/createtrip" method="post" class="createTrip">
+  <label asp-for="TripName">Name Your Trip</label>
+  <input asp-for="TripName">
+  <label asp-for="StartDate" >Start Date</label>
+  <input asp-for="StartDate" type="date">
+  <label asp-for="EndDate">End Date</label>
+  <input asp-for="EndDate" type="date">
+  <input type="button" Value="Add Trip" class="submit-trip btn btn-success" >
+</form>
+</div>
+
+<span class="addFlightForm">Add a Flight</span>
+<div class="addFlight"></div>
+
+<span class="addRoadTripForm">Add a Road Trip</span>
+<div class="addRoadTrip"></div>

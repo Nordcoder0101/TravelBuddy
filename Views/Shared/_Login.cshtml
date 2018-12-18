@@ -1,0 +1,17 @@
+@using TravelBuddy.Models
+@model LoginUser
+
+<h1 class="LoginHeader">Login to the Activity Planner!</h1>
+<a class="login" href="/">Register</a>
+
+<form asp-action="LoginUser" asp-controller="LoginReg" method="post">
+  <label for="email">Email</label>
+  <input asp-for="email">
+  <span asp-validation-for="email"></span>
+
+  <label for="password">Password</label>
+  <input asp-for="password">
+  <span asp-validation-for="password"></span>
+
+  <input type="submit" class="btn btn-primary" value="Sign In Now">
+</form>

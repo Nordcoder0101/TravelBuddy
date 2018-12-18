@@ -1,0 +1,11 @@
+@using TravelBuddy.Models
+@model Trip
+<form action="/createtrip" method="post" class="createTrip">
+  <label asp-for="TripName">Name Your Trip</label>
+  <input asp-for="TripName">
+  <label asp-for="StartDate" >Start Date</label>
+  <input asp-for="StartDate" type="date">
+  <label asp-for="EndDate">End Date</label>
+  <input asp-for="EndDate" type="date">
+  <input type="button" Value="Add Trip" class="submit-trip btn btn-success" >
+</form>

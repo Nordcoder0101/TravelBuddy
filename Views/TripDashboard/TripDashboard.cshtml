@@ -1,6 +1,10 @@
 @using TravelBuddy.HelperModels
 @model TripDashboard
-
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.js"
+                asp-fallback-test="window.jQuery">
+</script>
+<script src="~/js/tripdashboard.js" asp-append-version="true"></script>
 <h1>Here is your upcoming trip</h1>
 
 <table class="table">
@@ -9,20 +13,15 @@
       <th>Day of the Week</th>
       <th>Date</th>
       <th>City/Cities</th>
+      <th>State</th>
       <th>Weather</th>
       <th>Flights</th>
       <th>Road Trips</th>
       <th>Action</th>
     </tr>
   </thead>
-  <tbody>
-    @foreach (var item in @Model.DaysInTrip)
-    {
-      <tr>
-        <td>@item.DayOfTheWeek</td>
-        <td>@item.TheDay</td>
-      </tr>
-    }
-    
-  </tbody>
+  
 </table>
+
+<span class="addrt">Add RT</span>
+<div class="rtform"></div>

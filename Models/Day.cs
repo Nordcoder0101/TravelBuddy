@@ -15,6 +15,8 @@ namespace TravelBuddy.Models
     public int TripId {get;set;}
     [NotMapped]
     public List<string> Cities {get;set;}
+    [NotMapped]
+    public List<string> States {get;set;}
     public List<Flight> Flights {get; set;}
     public List<RoadTrip> RoadTrips {get;set;}
     public List<ActivityAndDay> ActivityAndDays {get;set;}

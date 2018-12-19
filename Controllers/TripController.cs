@@ -80,5 +80,11 @@ namespace TravelBuddy.Controllers
       return Json("Error");
       
     }
+    [HttpGet("showaddroadtrip")]
+    public IActionResult ShowAddRoadTrip()
+    {
+      return PartialView("_ShowCreateRoadTrip");
+    }
+
   }
 }

@@ -38,7 +38,7 @@ $(document).ready(function(){
       console.log(response)
       $(".addTrip").hide();
       $(".addTripForm").show()
-      location.reload();
+      location.reload("../../Views/Trip/UserDashboard.cshtml" );
 
     })
   })

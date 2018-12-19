@@ -23,11 +23,32 @@ namespace TravelBuddy.Controllers
     public IActionResult TripDashboard(int id)
     {
     
-      List<Day> AllDaysInTrip = dbContext.Days.Where(d => d.TripId == id).ToList();
-      
+      List<Day> AllDaysInTrip = dbContext.Days
+      .Where(d => d.TripId == id)
+      .Include(d => d.Flights)
+      .Include(d => d.RoadTrips)
+      .ToList();
+
 
 
       return View();
+    }
+
+    [HttpGet("getcitystate/{id}")]
+    public IActionResult GetCityState(int id)
+    {
+      List<Day> AllDaysInTrip = dbContext.Days
+      .Where(d => d.TripId == id)
+      .Include(d => d.Flights)
+      .Include(d => d.RoadTrips)
+      .ToList();
+
+     var Response = new {
+        AllDaysInTrip = AllDaysInTrip,
+        test = "hello"
+      };
+
+      return Json(Response);
     }
   }
 }

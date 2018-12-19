@@ -19,10 +19,13 @@ namespace TravelBuddy.Models
     public DateTime Arrival {get;set;}
     [Required]
     public string DepartingCity {get;set;}
+    public string DepartingState { get; set; }
     [Required]
     public string ArrivalCity {get;set;}
+    public string ArrivalState { get; set; }
     
     public int DayId {get;set;}
+    public Day DayOfFlight {get;set;}
     public Flight(){}
     
   }

@@ -20,19 +20,19 @@ namespace TravelBuddy.Controllers
 
     }
 
-    [HttpGet("tripdashboard")]
-    public IActionResult TripDashboard(Trip NewTrip)
+    [HttpGet("userdashboard")]
+    public IActionResult UserDashboard(Trip NewTrip)
     {
       if(HttpContext.Session.GetInt32("UserId")==null){
         return Redirect("/");
       }
       int? LoggedInUserId = HttpContext.Session.GetInt32("UserId");
       var LoggedInUser = dbContext.Users.FirstOrDefault(u => u.UserId == LoggedInUserId);
-      List<Trip> AllTrips = dbContext.Trips.Where(t => t.UserId == LoggedInUserId).ToList();
+      List<Trip> AllTrips = dbContext.Trips.Where(t => t.UserId == LoggedInUser.UserId).ToList();
       
 
-      TripDashboard DashboardInfo = new TripDashboard(LoggedInUser.UserId, LoggedInUser.FirstName, AllTrips);
-
+      UserDashboard DashboardInfo = new UserDashboard(LoggedInUser.UserId, LoggedInUser.FirstName, AllTrips);
+      System.Console.WriteLine($"<<<<<<>>>>>>>>>>>{DashboardInfo.UserName}, {DashboardInfo.EndDate}, {DashboardInfo.UserId}, {DashboardInfo.TripName}><><><><><><><><><>><><><><><>");
       return View(DashboardInfo);
     }
 
@@ -44,7 +44,7 @@ namespace TravelBuddy.Controllers
 
 
     [HttpPost("createtrip")]
-    public IActionResult CreateTrip(TripDashboard NewTripDashboard)
+    public IActionResult CreateTrip(UserDashboard NewTripDashboard)
       {
         
       int? LoggedInUserId = HttpContext.Session.GetInt32("UserId");
@@ -53,7 +53,7 @@ namespace TravelBuddy.Controllers
       if (ModelState.IsValid)
       {
         System.Console.WriteLine($">>>>>>{NewTripDashboard.UserId}{NewTripDashboard.TripName}{NewTripDashboard.StartDate}{NewTripDashboard.EndDate}<<<<<<<<<");
-        Trip NewTrip = new Trip(NewTripDashboard.UserId, NewTripDashboard.TripName, NewTripDashboard.StartDate, NewTripDashboard.EndDate);
+        Trip NewTrip = new Trip(LoggedInUser.UserId, NewTripDashboard.TripName, NewTripDashboard.StartDate, NewTripDashboard.EndDate);
 
       
 
@@ -64,15 +64,18 @@ namespace TravelBuddy.Controllers
 
         var NumDays = (NewTrip.EndDate - NewTrip.StartDate).TotalDays;
         var DayToAdd = NewTrip.StartDate;
+        var DayOfWeek = DayToAdd.DayOfWeek.ToString();
 
+        
 
 
         for (int i = 0; i <= NumDays; i++)
         {
-          Day NewDay = new Day(DayToAdd, TripToAddToDay.TripId);
+          Day NewDay = new Day(DayToAdd, DayOfWeek, TripToAddToDay.TripId);
           dbContext.Add(NewDay);
           dbContext.SaveChanges();
           DayToAdd = DayToAdd.AddDays(1);
+          DayOfWeek = DayToAdd.DayOfWeek.ToString();
         }
 
         return Json(NewTrip);
@@ -80,5 +83,11 @@ namespace TravelBuddy.Controllers
       return Json("Error");
       
     }
+    [HttpGet("showaddroadtrip")]
+    public IActionResult ShowAddRoadTrip()
+    {
+      return PartialView("_ShowCreateRoadTrip");
+    }
+
   }
 }

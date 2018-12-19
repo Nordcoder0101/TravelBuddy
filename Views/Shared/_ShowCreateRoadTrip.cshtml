@@ -1,18 +1,24 @@
 @using TravelBuddy.Models
 @model RoadTrip
 
-<form method="post" action="" class="RoadTripData">  
-  <label asp-for="StartingPoint"></label>
-  <input asp-for="StartingPoint">
+<form method="post" asp-action="createroadtrip" asp-contorller="RoadTrip">  
+  <label asp-for="DepartingCity"></label>
+  <input asp-for="DepartingCity">
 
-  <label asp-for="Destination"></label>
-  <input asp-for="Destination">
+  <label asp-for="DepartingState"></label>
+  <input asp-for="DepartingState">
+
+  <label asp-for="DestinationCity"></label>
+  <input asp-for="DestinationCity">
+
+  <label asp-for="DestinationState"></label>
+  <input asp-for="DestinationState">
 
   <label asp-for="StartDateTime"></label>
   <input asp-for="StartDateTime">
 
-  <input type="hidden" value="">
+  <input type="hidden" asp-for="DayId"value="">
 
-  <input type="button" class="btn btn-success createRoadTrip">
+  <input type="button" value="Create A Road Trip" class="btn btn-success createRoadTrip">
   
 </form>

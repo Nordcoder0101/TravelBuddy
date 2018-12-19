@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  
+  $(".addTrip").hide();
   $(".addFlightForm").click(function(){
     $(".addFlight").show();
     console.log("clicked")
@@ -27,16 +27,18 @@ $(document).ready(function(){
   })
 
   $(document).on('click', ".submit-trip", function(){
-    console.log("click")
-    var data = $(".createTrip").serialize();
     
+    var data = $(".createTrip").serialize();
+    console.log(data)
     $.ajax({
       url: "/createtrip",
       method: "post",
       data: data,
     }).done(function(response){
       console.log(response)
-      
+      $(".addTrip").hide();
+      $(".addTripForm").show()
+      location.reload("../../Views/Trip/UserDashboard.cshtml" );
 
     })
   })

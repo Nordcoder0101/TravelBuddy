@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TravelBuddy.Migrations
 {
-    public partial class TravelBuddy : Migration
+    public partial class TravelBudd : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -64,6 +64,7 @@ namespace TravelBuddy.Migrations
                     DayId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     TheDay = table.Column<DateTime>(nullable: false),
+                    DayOfTheWeek = table.Column<string>(nullable: true),
                     TripId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

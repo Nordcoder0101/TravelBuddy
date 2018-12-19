@@ -28,7 +28,7 @@ namespace TravelBuddy.Controllers
       List<Trip> AllTrips = dbContext.Trips.Where(t => t.UserId == LoggedInUserId).ToList();
       
 
-      TripDashboard DashboardInfo = new TripDashboard(LoggedInUserId, LoggedInUser.FirstName, AllTrips, NewTrip);
+      TripDashboard DashboardInfo = new TripDashboard(LoggedInUser.UserId, LoggedInUser.FirstName, AllTrips);
 
       return View(DashboardInfo);
     }
@@ -41,10 +41,18 @@ namespace TravelBuddy.Controllers
 
 
     [HttpPost("createtrip")]
-    public IActionResult CreateTrip(Trip NewTrip)
-    {
-      if(ModelState.IsValid)
+    public IActionResult CreateTrip(TripDashboard NewTripDashboard)
       {
+        
+      int? LoggedInUserId = HttpContext.Session.GetInt32("UserId");
+      var LoggedInUser = dbContext.Users.FirstOrDefault(u => u.UserId == LoggedInUserId);
+
+      if (ModelState.IsValid)
+      {
+        System.Console.WriteLine($">>>>>>{NewTripDashboard.UserId}{NewTripDashboard.TripName}{NewTripDashboard.StartDate}{NewTripDashboard.EndDate}<<<<<<<<<");
+        Trip NewTrip = new Trip(NewTripDashboard.UserId, NewTripDashboard.TripName, NewTripDashboard.StartDate, NewTripDashboard.EndDate);
+
+      
 
         dbContext.Add(NewTrip);
         dbContext.SaveChanges();

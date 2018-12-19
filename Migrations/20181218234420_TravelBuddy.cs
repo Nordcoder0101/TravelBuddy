@@ -31,7 +31,8 @@ namespace TravelBuddy.Migrations
                 {
                     TripId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    TripName = table.Column<string>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    TripName = table.Column<string>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false)
                 },
@@ -63,7 +64,7 @@ namespace TravelBuddy.Migrations
                     DayId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     TheDay = table.Column<DateTime>(nullable: false),
-                    TripId = table.Column<int>(nullable: true)
+                    TripId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -73,7 +74,7 @@ namespace TravelBuddy.Migrations
                         column: x => x.TripId,
                         principalTable: "Trips",
                         principalColumn: "TripId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -100,35 +101,6 @@ namespace TravelBuddy.Migrations
                         column: x => x.DayId,
                         principalTable: "Days",
                         principalColumn: "DayId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Drives",
-                columns: table => new
-                {
-                    DriveId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    StartingPoint = table.Column<string>(nullable: false),
-                    Destination = table.Column<string>(nullable: false),
-                    StartDateTime = table.Column<DateTime>(nullable: false),
-                    DayId = table.Column<int>(nullable: false),
-                    TripId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Drives", x => x.DriveId);
-                    table.ForeignKey(
-                        name: "FK_Drives_Days_DayId",
-                        column: x => x.DayId,
-                        principalTable: "Days",
-                        principalColumn: "DayId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Drives_Trips_TripId",
-                        column: x => x.TripId,
-                        principalTable: "Trips",
-                        principalColumn: "TripId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -164,6 +136,35 @@ namespace TravelBuddy.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "RoadTrips",
+                columns: table => new
+                {
+                    DriveId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    StartingPoint = table.Column<string>(nullable: false),
+                    Destination = table.Column<string>(nullable: false),
+                    StartDateTime = table.Column<DateTime>(nullable: false),
+                    DayId = table.Column<int>(nullable: false),
+                    TripId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoadTrips", x => x.DriveId);
+                    table.ForeignKey(
+                        name: "FK_RoadTrips_Days_DayId",
+                        column: x => x.DayId,
+                        principalTable: "Days",
+                        principalColumn: "DayId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RoadTrips_Trips_TripId",
+                        column: x => x.TripId,
+                        principalTable: "Trips",
+                        principalColumn: "TripId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ActivityAndDays_ActivityId",
                 table: "ActivityAndDays",
@@ -180,16 +181,6 @@ namespace TravelBuddy.Migrations
                 column: "TripId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Drives_DayId",
-                table: "Drives",
-                column: "DayId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Drives_TripId",
-                table: "Drives",
-                column: "TripId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Flights_DayId",
                 table: "Flights",
                 column: "DayId");
@@ -197,6 +188,16 @@ namespace TravelBuddy.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Flights_TripId",
                 table: "Flights",
+                column: "TripId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoadTrips_DayId",
+                table: "RoadTrips",
+                column: "DayId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoadTrips_TripId",
+                table: "RoadTrips",
                 column: "TripId");
         }
 
@@ -206,10 +207,10 @@ namespace TravelBuddy.Migrations
                 name: "ActivityAndDays");
 
             migrationBuilder.DropTable(
-                name: "Drives");
+                name: "Flights");
 
             migrationBuilder.DropTable(
-                name: "Flights");
+                name: "RoadTrips");
 
             migrationBuilder.DropTable(
                 name: "Users");

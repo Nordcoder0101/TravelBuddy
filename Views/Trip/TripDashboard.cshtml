@@ -4,7 +4,10 @@
 
 
 <h1>Your Trips</h1>
-
+@foreach (var t in @Model.AllTrips)
+{
+  <h1>@t.TripName</h1>
+}
 <br>
 
 
@@ -14,14 +17,15 @@
 <span class="addTripForm" class="btn btn-primary">Add a Trip</span>
 <div class="addTrip">
   <form action="/createtrip" method="post" class="createTrip">
-  <label asp-for="TripName">Name Your Trip</label>
-  <input asp-for="TripName">
-  <label asp-for="StartDate" >Start Date</label>
-  <input asp-for="StartDate" type="date">
-  <label asp-for="EndDate">End Date</label>
-  <input asp-for="EndDate" type="date">
-  <input type="button" Value="Add Trip" class="submit-trip btn btn-success" >
-</form>
+    <label asp-for="TripName">Name Your Trip</label>
+    <input asp-for="TripName">
+    <label asp-for="StartDate" >Start Date</label>
+    <input asp-for="StartDate" type="date">
+    <label asp-for="EndDate">End Date</label>
+    <input asp-for="EndDate" type="date">
+    <input asp-for="UserId" type="hidden" value="@Model.UserId">
+    <input type="button" Value="Add Trip" class="submit-trip btn btn-success" >
+  </form>
 </div>
 
 <span class="addFlightForm">Add a Flight</span>

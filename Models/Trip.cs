@@ -9,8 +9,7 @@ namespace TravelBuddy.Models
   {
     [Key]
     public int TripId { get; set; }
-    [Required]
-    [MinLength(3)]
+    
     public int UserId {get;set;}
     public string TripName{get;set;}
     [Required]
@@ -21,5 +20,12 @@ namespace TravelBuddy.Models
     public List<Flight> FlightsInTrip {get;set;}
     public List<Day> DaysInTrip {get;set;}
     public Trip() {}
+    public Trip(int userid, string tripname, DateTime startdate, DateTime enddate)
+    {
+      UserId = userid;
+      TripName = tripname;
+      StartDate = startdate;
+      EndDate = enddate;
+    }
   }
 }

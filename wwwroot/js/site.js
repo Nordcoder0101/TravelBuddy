@@ -26,7 +26,8 @@ $(document).ready(function(){
     })
   })
 
-  $(".submit-trip").on('click', function(){
+  $(document).on('click', ".submit-trip", function(){
+    console.log("click")
     var data = $(".createTrip").serialize();
     
     $.ajax({
@@ -40,7 +41,8 @@ $(document).ready(function(){
     })
   })
 
-  $(document).on("click", ".CreateFlight", function() {
+  $(document).on("click", ".hello", function() {
+    console.log('click')
     var data = $(".createFlight").serialize();
     console.log(data)
     $.ajax({
@@ -52,5 +54,6 @@ $(document).ready(function(){
       $(".addFlightForm").show();
       $(".addFlight").hide();
     })
+    return false
   })
 })

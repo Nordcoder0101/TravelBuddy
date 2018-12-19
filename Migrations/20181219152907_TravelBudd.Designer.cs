@@ -9,8 +9,8 @@ using TravelBuddy.Models;
 namespace TravelBuddy.Migrations
 {
     [DbContext(typeof(TravelBuddyContext))]
-    [Migration("20181218234420_TravelBuddy")]
-    partial class TravelBuddy
+    [Migration("20181219152907_TravelBudd")]
+    partial class TravelBudd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -65,6 +65,8 @@ namespace TravelBuddy.Migrations
                 {
                     b.Property<int>("DayId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DayOfTheWeek");
 
                     b.Property<DateTime>("TheDay");
 

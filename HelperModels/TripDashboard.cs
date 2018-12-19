@@ -8,21 +8,16 @@ namespace TravelBuddy.HelperModels
 {
   public class TripDashboard
   {
-    public int UserId { get; set; }
-    public string UserName {get;set;}    
-    public List<Trip> AllTrips {get;set;}
-    
-    public string TripName {get;set;}
-    public DateTime StartDate {get;set;}
-    public DateTime EndDate  {get;set;}
-
+    public List<Day> DaysInTrip {get;set;}
+    public List<Flight> AllFlightsInDay {get;set;}
+    public List<RoadTrip> AllRoadtripsInDay {get;set;}
     public TripDashboard(){}
-    public TripDashboard(int id, string username, List<Trip> alltrips)
+    public TripDashboard(string DoW, List<Day> DiT, List<Flight> AFiD, List<RoadTrip> ARiD)
     {
-      UserId = id;
-      UserName = username;
-      AllTrips = alltrips;
-      
+      DaysInTrip = DiT;
+      AllFlightsInDay = AFiD;
+      AllRoadtripsInDay = ARiD;
     }
+
   }
 }

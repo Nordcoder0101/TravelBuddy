@@ -64,6 +64,8 @@ namespace TravelBuddy.Migrations
                     b.Property<int>("DayId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("DayOfTheWeek");
+
                     b.Property<DateTime>("TheDay");
 
                     b.Property<int>("TripId");

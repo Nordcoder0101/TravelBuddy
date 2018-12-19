@@ -1,12 +1,14 @@
-@using TravelBuddy.Models
+
 @using TravelBuddy.HelperModels
-@model TripDashboard
+@model UserDashboard
+
+<h1>Hello @Model.UserName</h1>
 
 
-<h1>Your Trips</h1>
+<h2>Your Trips</h2>
 @foreach (var t in @Model.AllTrips)
 {
-  <h1>@t.TripName</h1>
+  <h3 class="trips"><a href="showdays/@t.TripId">@t.TripName</a></h3>
 }
 <br>
 
@@ -19,17 +21,14 @@
   <form action="/createtrip" method="post" class="createTrip">
     <label asp-for="TripName">Name Your Trip</label>
     <input asp-for="TripName">
+    <span asp-validation-for="TripName"></span>
     <label asp-for="StartDate" >Start Date</label>
     <input asp-for="StartDate" type="date">
+    <span asp-validation-for="StartDate"></span>
     <label asp-for="EndDate">End Date</label>
     <input asp-for="EndDate" type="date">
-    <input asp-for="UserId" type="hidden" value="@Model.UserId">
+    <span asp-validation-for="EndDate"></span>
     <input type="button" Value="Add Trip" class="submit-trip btn btn-success" >
   </form>
 </div>
 
-<span class="addFlightForm">Add a Flight</span>
-<div class="addFlight"></div>
-
-<span class="addRoadTripForm">Add a Road Trip</span>
-<div class="addRoadTrip"></div>

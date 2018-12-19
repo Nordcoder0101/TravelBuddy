@@ -48,7 +48,7 @@ namespace TravelBuddy.Controllers
           HttpContext.Session.SetInt32("UserId", AddedUser.UserId);
           int? LoggedInUserId = HttpContext.Session.GetInt32("UserId");
 
-          return RedirectToAction("TripDashboard", "Trip");
+          return RedirectToAction("UserDashboard", "Trip");
         }
       }
       else
@@ -85,7 +85,7 @@ namespace TravelBuddy.Controllers
         }
         HttpContext.Session.SetInt32("UserId", UserToCheck.UserId);
         int? LoggedInUserId = HttpContext.Session.GetInt32("UserId");
-        return RedirectToAction("TripDashboard", "Trip");
+        return RedirectToAction("UserDashboard", "Trip");
       }
       return View("Index");
     }

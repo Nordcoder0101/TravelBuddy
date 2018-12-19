@@ -24,7 +24,7 @@ $(document).ready(function(){
       url: "/showaddroadtrip",
       method: "get"
     }).done(function(response){
-      $(".rtform").html(response)
+      $(".rtform").html(response);
   })
   
   })

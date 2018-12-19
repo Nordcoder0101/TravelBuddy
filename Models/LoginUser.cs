@@ -8,10 +8,12 @@ namespace TravelBuddy.Models
   {
     [EmailAddress]
     [Required]
-    public string email { get; set; }
+    [Display(Name="Email")]
+    public string LoginEmail { get; set; }
     [Required]
+    [Display(Name="Password")]
     [DataType(DataType.Password)]
-    public string password { get; set; }
+    public string LoginPassword { get; set; }
 
     public LoginUser() { }
   }

@@ -11,9 +11,11 @@ namespace TravelBuddy.Models
     public int UserId { get; set; }
     [Required]
     [MinLength(3)]
+    [Display(Name="First Name")]
     public string FirstName { get; set; }
     [Required]
     [MinLength(3)]
+    [Display(Name="Last Name")]
     public string LastName { get; set; }
     [EmailAddress]
     [Required]

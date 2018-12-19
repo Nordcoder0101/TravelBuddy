@@ -22,10 +22,11 @@ namespace TravelBuddy.Controllers
 
     [HttpGet]
     [Route("")]
-    public IActionResult Index()
+    public IActionResult Login()
     {
       return View();
     }
+
 
     [HttpPost("RegisterUser")]
     public IActionResult RegisterUser(User user)
@@ -35,7 +36,7 @@ namespace TravelBuddy.Controllers
         if (dbContext.Users.Any(u => u.Email == user.Email))
         {
           ModelState.AddModelError("Email", "Email already in use!");
-          return View("Index");
+          return View("Login");
         }
         else
         {
@@ -53,7 +54,7 @@ namespace TravelBuddy.Controllers
       }
       else
       {
-        return View("Index");
+        return View("Login");
       }
     }
 
@@ -68,33 +69,33 @@ namespace TravelBuddy.Controllers
     {
       if (ModelState.IsValid)
       {
-        var UserToCheck = dbContext.Users.FirstOrDefault(u => u.Email == UserSubmission.email);
+        var UserToCheck = dbContext.Users.FirstOrDefault(u => u.Email == UserSubmission.LoginEmail);
         if (UserToCheck == null)
         {
-          ModelState.AddModelError("Email", "Invalid Email or Password");
-          return View("Index");
+          ModelState.AddModelError("LoginEmail", "Invalid Email or Password");
+          return View("login");
         }
         var hasher = new PasswordHasher<LoginUser>();
 
-        var result = hasher.VerifyHashedPassword(UserSubmission, UserToCheck.Password, UserSubmission.password);
+        var result = hasher.VerifyHashedPassword(UserSubmission, UserToCheck.Password, UserSubmission.LoginPassword);
 
         if (result == 0)
         {
-          ModelState.AddModelError("Password", "Invalid Email or Password");
-          return View("Index");
+          ModelState.AddModelError("LoginPassword", "Invalid Email or Password");
+          return View("login");
         }
         HttpContext.Session.SetInt32("UserId", UserToCheck.UserId);
         int? LoggedInUserId = HttpContext.Session.GetInt32("UserId");
         return RedirectToAction("TripDashboard", "Trip");
       }
-      return View("Index");
+      return View("login");
     }
 
     [HttpGet("logout")]
     public IActionResult Logout()
     {
       HttpContext.Session.Clear();
-      return View("Index");
+      return View("Login");
     }
   }
 

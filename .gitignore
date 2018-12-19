@@ -1,6 +1,7 @@
 ###################
 # compiled source #
 ###################
+/Migrations
 *.com
 *.class
 *.dll

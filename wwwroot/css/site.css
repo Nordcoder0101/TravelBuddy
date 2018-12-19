@@ -21,3 +21,42 @@
 .arrivalinput {
   margin: 0 0 0 48px;
 }
+.forms
+{
+  width: 45%;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 20%;
+}
+body{
+  background-image: url("../img/1.jpg");
+  background-size: cover;
+  color:black;
+}
+.jumbotron{
+  margin-top: 5%;
+  background: none
+}
+.nav a{
+  color:white;
+  font-size: 20px;
+  text-decoration: none;
+}
+.nav a:hover
+{
+  color:black;
+  background-color: white;
+}
+.nav {
+  margin-bottom: 2%;
+}
+.trip
+{
+  border-left: 5px solid rgb(106, 189, 106);
+  padding: 10px;
+  margin-top:20px;
+}
+.trip a{
+  text-decoration: none;
+  color:black;
+}

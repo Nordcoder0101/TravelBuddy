@@ -23,6 +23,9 @@ namespace TravelBuddy.Controllers
     [HttpGet("userdashboard")]
     public IActionResult UserDashboard(Trip NewTrip)
     {
+      if(HttpContext.Session.GetInt32("UserId")==null){
+        return Redirect("/");
+      }
       int? LoggedInUserId = HttpContext.Session.GetInt32("UserId");
       var LoggedInUser = dbContext.Users.FirstOrDefault(u => u.UserId == LoggedInUserId);
       List<Trip> AllTrips = dbContext.Trips.Where(t => t.UserId == LoggedInUser.UserId).ToList();

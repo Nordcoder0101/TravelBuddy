@@ -12,8 +12,26 @@ $(document).ready(function(){
     })
   })
 
+
   function GetPartial(){
     var data =$(".add-trip").attr("data-event")
+
+  $(document).on('click', ".CreateFlight", function(){
+    var data = $(".createFlight").serialize();
+    $.ajax({
+      url: "createflight",
+      method: "post",
+      data: data,
+
+    }).done(function(response){
+      console.log(response)
+    })
+  })
+
+  $(".addTripForm").click(function () {
+    $(".addTrip").show();
+    console.log("clicked")
+
     $.ajax({
       url: "/showcreate/${data}",
       method: "get"

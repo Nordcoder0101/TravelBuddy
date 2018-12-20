@@ -1,7 +1,9 @@
 
 @using TravelBuddy.HelperModels
 @model UserDashboard
+
     <partial name="../menu"/>
+
 <div class="jumbotron">
   <h2 class="display-4">Welcome @Model.UserName to the Trip Planner!</h2>
   <p class="lead">This is a simple app that allows user to add activities (Trips ,Flights ,etc) and track them.</p>
@@ -20,6 +22,7 @@
     <input type="submit" Value="Add Trip" class="submit-trip btn btn-success" >
   </form>
 </div>
+
 
 @if(@Model.AllTrips!= null)
 {

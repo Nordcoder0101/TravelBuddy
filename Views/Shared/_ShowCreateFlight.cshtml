@@ -26,8 +26,20 @@
     <span asp-validation-for="DepartingCity"></span>
 
     <label class="ArrivalCity"asp-for="ArrivalCity"></label>
-    <input class="ArrivalInput" asp-for="ArrivalCity">
+    <input class="ArrivalCity" asp-for="ArrivalCity">
     <span asp-validation-for="ArrivalCity"></span>
-  </div>        
-</div>
+
+
+    
+    <input type="hidden" asp-for="DayId" value="1">
+  </div>
+  <div> 
+    <label asp-for="DepartingState">Departing State</label>
+    <input asp-for="DepartingState">
+    <label asp-for="ArrivalState">Arrival State</label>
+    <input asp-for="ArrivalState">
+  </div>
+
+  <input type="button" class="CreateFlight btn btn-success" value="Add Flight">
+
 </form>

@@ -36,10 +36,10 @@ namespace TravelBuddy.Controllers
       return View(DashboardInfo);
     }
 
-    [HttpGet("showcreate/{action}")]
-    public IActionResult ShowCreate(string action)
+    [HttpGet("showcreate/{id}")]
+    public IActionResult ShowCreate(string id)
     {
-      return PartialView($"_ShowCreate{action}");
+      return PartialView($"_ShowCreate{id}");
     }
     [HttpGet("showcreateactivity")]
     public IActionResult ShowCreateActivity()
@@ -84,7 +84,7 @@ namespace TravelBuddy.Controllers
           DayOfWeek = DayToAdd.DayOfWeek.ToString();
         }
 
-        return Json(NewTrip);
+        return RedirectToAction("UserDashboard",Json(NewTrip));
       }
       return Json("Error");
       

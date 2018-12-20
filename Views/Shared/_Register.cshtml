@@ -3,39 +3,29 @@
     <form class="form-horizontal" method="post" asp-action="RegisterUser" asp-controller="LoginReg" class="form-horizontal">
     <h3 class="LoginHeader">Register Here!</h3>    
     <div class="form-group">
-        <label asp-for="FirstName" class="col-md-8 control-label"></label>
-        <div class="col-md-8">
+        <label asp-for="FirstName"></label>
         <input asp-for="FirstName" class="form-control col-md-8" aria-describedby="emailHelp">
         <span asp-validation-for="FirstName" class="alert-danger" role="alert"></span>
-        </div>
     </div>
     <div class="form-group">
-        <label asp-for="LastName" class="col-md-8 control-label"></label>
-        <div class="col-md-8">
+        <label asp-for="LastName"></label>
           <input asp-for="LastName" class="form-control col-md-8" aria-describedby="emailHelp">
           <span asp-validation-for="LastName" class="alert-danger" role="alert"></span>
-        </div>
     </div>
     <div class="form-group">
-        <label asp-for="Email" class="col-md-8 control-label"></label>
-        <div class="col-md-8">
+        <label asp-for="Email"></label>
         <input asp-for="Email" class="form-control col-md-8" aria-describedby="emailHelp">
         <span asp-validation-for="Email" class="alert-danger" role="alert"></span>
-        </div>
     </div>
     <div class="form-group">
-        <label asp-for="Password" class="col-md-8 control-label"></label>
-        <div class="col-md-8">
+        <label asp-for="Password"></label>
         <input asp-for="Password" class="form-control col-md-8" aria-describedby="emailHelp">
         <span asp-validation-for="Password" class="alert-danger" role="alert"></span>
-        </div>
     </div>
     <div class="form-group">
-        <label asp-for="Confirm" class="col-md-8 control-label"></label>
-        <div class="col-md-8">
+        <label asp-for="Confirm"></label>
         <input asp-for="Confirm" class="form-control col-md-8" aria-describedby="emailHelp">
         <span asp-validation-for="Confirm" class="alert-danger" role="alert"></span>
-        </div>
     </div>
     <button type="submit" class="btn btn-success">Register</button>
 

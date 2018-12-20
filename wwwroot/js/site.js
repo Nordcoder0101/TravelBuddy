@@ -13,8 +13,19 @@ $(document).ready(function(){
   })
 
 
-  function GetPartial(){
-    var data =$(".add-trip").attr("data-event")
+  $(".add").click(function(){
+    var data=$(this).attr("data-event")
+    console.log("clicked")
+    $.ajax({
+      url: `/showcreate/${data}`,
+      method: "get"
+    }).done(function(response){
+      console.log(response)
+      $(".modal-body").html(response)
+      $('#exampleModalCenter').modal()
+    })
+  return false;
+})
 
   $(document).on('click', ".CreateFlight", function(){
     var data = $(".createFlight").serialize();
@@ -25,19 +36,6 @@ $(document).ready(function(){
 
     }).done(function(response){
       console.log(response)
-    })
-  })
-
-  $(".addTripForm").click(function () {
-    $(".addTrip").show();
-    console.log("clicked")
-
-    $.ajax({
-      url: "/showcreate/${data}",
-      method: "get"
-    }).done(function (response) {
-      console.log(response)
-      $(".modal-body").html(response)
     })
   })
 

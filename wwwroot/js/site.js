@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  $(".addTrip").hide();
   $(".addFlightForm").click(function(){
     $(".addFlight").show();
     console.log("clicked")
@@ -13,16 +12,14 @@ $(document).ready(function(){
     })
   })
 
-  $(".addTripForm").click(function () {
-    $(".addTrip").show();
-    console.log("clicked")
+  function GetPartial(){
+    var data =$(".add-trip").attr("data-event")
     $.ajax({
-      url: "/showcreatetrip",
+      url: "/showcreate/${data}",
       method: "get"
     }).done(function (response) {
       console.log(response)
-      $(".addTrip").html(response)
-      $(".addTripForm").hide();
+      $(".modal-body").html(response)
     })
   })
 

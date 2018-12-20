@@ -1,14 +1,10 @@
 @using TravelBuddy.Models
 @model Flight
-
-
 <form action="/createflight"  class="createFlight" method="post">
   <div>
     <label asp-for="Airline"></label>
     <input class="airlineInput" asp-for="Airline">
     <span asp-validation-for="Airline"></span>
-    
-
     
     <label class="FlightNumber" asp-for="FlightNumber"></label>
     <input asp-for="FlightNumber">
@@ -32,7 +28,6 @@
     <label class="ArrivalCity"asp-for="ArrivalCity"></label>
     <input class="ArrivalInput" asp-for="ArrivalCity">
     <span asp-validation-for="ArrivalCity"></span>
-  </div>
-
-  <input type="button" class="CreateFlight btn btn-success hello" value="Add Flight">
+  </div>        
+</div>
 </form>

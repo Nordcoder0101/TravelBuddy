@@ -1,19 +1,13 @@
 
 @using TravelBuddy.HelperModels
 @model UserDashboard
-
-<h1>Hello @Model.UserName</h1>
-
-
-
+    <partial name="../menu"/>
 <div class="jumbotron">
   <h2 class="display-4">Welcome @Model.UserName to the Trip Planner!</h2>
   <p class="lead">This is a simple app that allows user to add activities (Trips ,Flights ,etc) and track them.</p>
-  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#collapseExample">Get Started</button>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="collapse" data-target="#collapseExample">Get Started</button>
 </div>
 <div id="collapseExample" class="collapse addTrip">
-
-
   <form action="/createtrip" method="post" class="createTrip">
     <label asp-for="TripName">Trip Name</label>
     <input asp-for="TripName">
@@ -26,5 +20,13 @@
     <input type="submit" Value="Add Trip" class="submit-trip btn btn-success" >
   </form>
 </div>
+
+@if(@Model.AllTrips!= null)
+{
+  foreach(var trip in @Model.AllTrips)
+  {
+    <h4 class="trip"><a href="/showdays/@trip.TripId">@trip.TripName</a></h4>
+  }
+}
 
 

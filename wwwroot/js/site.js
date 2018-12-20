@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  $(".addTrip").hide();
   $(".addFlightForm").click(function(){
     $(".addFlight").show();
     console.log("clicked")
@@ -10,6 +9,18 @@ $(document).ready(function(){
       console.log(response)
       $(".addFlight").html(response)
       $(".addFlightForm").hide();
+    })
+  })
+
+  $(document).on('click', ".CreateFlight", function(){
+    var data = $(".createFlight").serialize();
+    $.ajax({
+      url: "createflight",
+      method: "post",
+      data: data,
+
+    }).done(function(response){
+      console.log(response)
     })
   })
 

@@ -1,8 +1,10 @@
 @using TravelBuddy.Models
-@model Flight
-<form asp-action="/createflight" asp-controller="Trip" class="createFlight" method="post">
+@model FlightValidation
+
+<form action="/createflight"  class="createFlight" method="post">
   <h3>Add Flight</h3>  
   <div class="form-group">
+
     <label asp-for="Airline"></label>
     <input asp-for="Airline" class="form-control col-md-8">
     <span asp-validation-for="Airline" class="alert-danger" role="alert"></span>

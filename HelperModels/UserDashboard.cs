@@ -15,6 +15,7 @@ namespace TravelBuddy.HelperModels
     public string TripName {get;set;}
     public DateTime StartDate {get;set;}
     public DateTime EndDate  {get;set;}
+    
 
     public UserDashboard(){}
     public UserDashboard(int id, string username, List<Trip> alltrips)

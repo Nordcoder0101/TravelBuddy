@@ -80,20 +80,17 @@ namespace TravelBuddy.Migrations
                     b.Property<int>("FlightId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Airline")
-                        .IsRequired();
+                    b.Property<string>("Airline");
 
                     b.Property<DateTime>("Arrival");
 
-                    b.Property<string>("ArrivalCity")
-                        .IsRequired();
+                    b.Property<string>("ArrivalCity");
 
                     b.Property<string>("ArrivalState");
 
                     b.Property<int>("DayId");
 
-                    b.Property<string>("DepartingCity")
-                        .IsRequired();
+                    b.Property<string>("DepartingCity");
 
                     b.Property<string>("DepartingState");
 
@@ -101,45 +98,11 @@ namespace TravelBuddy.Migrations
 
                     b.Property<string>("FlightNumber");
 
-                    b.Property<int?>("TripId");
-
                     b.HasKey("FlightId");
 
                     b.HasIndex("DayId");
 
-                    b.HasIndex("TripId");
-
                     b.ToTable("Flights");
-                });
-
-            modelBuilder.Entity("TravelBuddy.Models.RoadTrip", b =>
-                {
-                    b.Property<int>("DriveId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("DayId");
-
-                    b.Property<string>("DepartingCity")
-                        .IsRequired();
-
-                    b.Property<string>("DepartingState");
-
-                    b.Property<string>("DestinationCity")
-                        .IsRequired();
-
-                    b.Property<string>("DestinationState");
-
-                    b.Property<DateTime>("StartDateTime");
-
-                    b.Property<int?>("TripId");
-
-                    b.HasKey("DriveId");
-
-                    b.HasIndex("DayId");
-
-                    b.HasIndex("TripId");
-
-                    b.ToTable("RoadTrips");
                 });
 
             modelBuilder.Entity("TravelBuddy.Models.Trip", b =>
@@ -157,6 +120,8 @@ namespace TravelBuddy.Migrations
 
                     b.HasKey("TripId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Trips");
                 });
 
@@ -165,17 +130,13 @@ namespace TravelBuddy.Migrations
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Email")
-                        .IsRequired();
+                    b.Property<string>("Email");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired();
+                    b.Property<string>("FirstName");
 
-                    b.Property<string>("LastName")
-                        .IsRequired();
+                    b.Property<string>("LastName");
 
-                    b.Property<string>("Password")
-                        .IsRequired();
+                    b.Property<string>("Password");
 
                     b.HasKey("UserId");
 
@@ -196,34 +157,26 @@ namespace TravelBuddy.Migrations
 
             modelBuilder.Entity("TravelBuddy.Models.Day", b =>
                 {
-                    b.HasOne("TravelBuddy.Models.Trip")
-                        .WithMany("DaysInTrip")
+                    b.HasOne("TravelBuddy.Models.Trip", "Trip")
+                        .WithMany("Day")
                         .HasForeignKey("TripId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TravelBuddy.Models.Flight", b =>
                 {
-                    b.HasOne("TravelBuddy.Models.Day", "DayOfFlight")
+                    b.HasOne("TravelBuddy.Models.Day", "Day")
                         .WithMany("Flights")
                         .HasForeignKey("DayId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TravelBuddy.Models.Trip")
-                        .WithMany("FlightsInTrip")
-                        .HasForeignKey("TripId");
                 });
 
-            modelBuilder.Entity("TravelBuddy.Models.RoadTrip", b =>
+            modelBuilder.Entity("TravelBuddy.Models.Trip", b =>
                 {
-                    b.HasOne("TravelBuddy.Models.Day")
-                        .WithMany("RoadTrips")
-                        .HasForeignKey("DayId")
+                    b.HasOne("TravelBuddy.Models.User", "User")
+                        .WithMany("AllTrips")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TravelBuddy.Models.Trip")
-                        .WithMany("RoadTripsForTrip")
-                        .HasForeignKey("TripId");
                 });
 #pragma warning restore 612, 618
         }

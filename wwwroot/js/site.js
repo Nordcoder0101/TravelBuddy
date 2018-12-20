@@ -13,6 +13,7 @@ $(document).ready(function(){
   })
 
 
+
   $(".add").click(function(){
     var data=$(this).attr("data-event")
     console.log("clicked")

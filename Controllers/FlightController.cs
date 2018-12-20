@@ -26,13 +26,24 @@ namespace TravelBuddy.Controllers
     }
 
     [HttpPost("createflight")]
-    public IActionResult CreateFlight(Flight NewFlight)
+    public IActionResult CreateFlight(FlightValidation newFlight)
     {
-      System.Console.WriteLine(">>>>>>>>>>>HERE<<<<<<<<<<<<<");
-      dbContext.Add(NewFlight);
-      dbContext.SaveChanges();
+      if (ModelState.IsValid)
+      {
+        Flight createNew = new Flight();
+        createNew.Arrival = newFlight.Arrival;
+        createNew.ArrivalCity = newFlight.ArrivalCity;
 
-      return Json(NewFlight);
+        System.Console.WriteLine(">>>>>>>>>>>HERE<<<<<<<<<<<<<");
+        dbContext.Add(createNew);
+        dbContext.SaveChanges();
+        return Json(createNew);
+      }
+      else
+      {
+        return View();
+      }
+
     }
   }
 }

@@ -1,6 +1,11 @@
 @using TravelBuddy.Models
 @model List<Day>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="~/js/tripdashboard.js" asp-append-version="true"></script>
+
     <partial name="../menu"/>
+    <span class="click">Click</span>
 <div class="alldays">
     @if(@Model!=null)
     {

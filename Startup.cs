@@ -20,6 +20,7 @@ namespace TravelBuddy
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            
             services.AddMvc();
             services.AddDbContext<TravelBuddyContext>(options => options.UseMySql(Configuration["DBInfo:ConnectionString"]));
 
@@ -33,6 +34,7 @@ namespace TravelBuddy
 			{
             	app.UseDeveloperExceptionPage();
 			}
+            
             app.UseStaticFiles();
             app.UseSession();
             app.UseMvc();

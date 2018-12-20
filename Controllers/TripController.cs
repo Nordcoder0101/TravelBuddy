@@ -36,11 +36,12 @@ namespace TravelBuddy.Controllers
       return View(DashboardInfo);
     }
 
-    [HttpGet("showcreate/{action}")]
-    public IActionResult ShowCreate(string action)
+    [HttpGet("showcreate/{id}")]
+    public IActionResult ShowCreate(string id)
     {
-      return PartialView($"_ShowCreate{action}");
+      return PartialView($"_ShowCreate{id}");
     }
+    
     [HttpGet("showcreateactivity")]
     public IActionResult ShowCreateActivity()
     {
@@ -58,10 +59,19 @@ namespace TravelBuddy.Controllers
 
       if (ModelState.IsValid)
       {
-        System.Console.WriteLine($">>>>>>{NewTripDashboard.UserId}{NewTripDashboard.TripName}{NewTripDashboard.StartDate}{NewTripDashboard.EndDate}<<<<<<<<<");
-        Trip NewTrip = new Trip(LoggedInUser.UserId, NewTripDashboard.TripName, NewTripDashboard.StartDate, NewTripDashboard.EndDate);
+        System.Console.WriteLine($@"
+          >>>>>>
+          {NewTripDashboard.UserId}
+          {NewTripDashboard.TripName}
+          {NewTripDashboard.StartDate}
+          {NewTripDashboard.EndDate}
+          <<<<<<<<<");
 
-      
+        Trip NewTrip = new Trip();
+        NewTrip.UserId = LoggedInUser.UserId;
+        NewTrip.TripName = NewTripDashboard.TripName;
+        NewTrip.StartDate = NewTripDashboard.StartDate;
+        NewTrip.EndDate = NewTripDashboard.EndDate;
 
         dbContext.Add(NewTrip);
         dbContext.SaveChanges();
@@ -77,9 +87,14 @@ namespace TravelBuddy.Controllers
 
         for (int i = 0; i <= NumDays; i++)
         {
-          Day NewDay = new Day(DayToAdd, DayOfWeek, TripToAddToDay.TripId);
+          Day NewDay = new Day();
+          NewDay.TheDay = DayToAdd;
+          NewDay.DayOfTheWeek = DayOfWeek;
+          NewDay.TripId = TripToAddToDay.TripId;
+
           dbContext.Add(NewDay);
           dbContext.SaveChanges();
+          
           DayToAdd = DayToAdd.AddDays(1);
           DayOfWeek = DayToAdd.DayOfWeek.ToString();
         }

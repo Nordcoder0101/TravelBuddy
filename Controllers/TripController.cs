@@ -99,7 +99,7 @@ namespace TravelBuddy.Controllers
           DayOfWeek = DayToAdd.DayOfWeek.ToString();
         }
 
-        return Json(NewTrip);
+        return RedirectToAction("UserDashboard",Json(NewTrip));
       }
       return Json("Error");
       

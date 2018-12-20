@@ -1,20 +1,29 @@
 @using TravelBuddy.Models
 @model RoadTrip
-      <form method="post" asp-action="createroadtrip" asp-contorller="RoadTrip">  
-        <label asp-for="DepartingCity"></label>
-        <input asp-for="DepartingCity">
+  <form method="post" asp-action="createroadtrip" asp-contorller="RoadTrip"> 
+    <h3>Add Road Trip</h3>  
+    <div class="form-group">
+      <label asp-for="DepartingCity">Departing City</label>
+      <input asp-for="DepartingCity" class="form-control col-md-8">
+    </div>
+    <div class="form-group">
+      <label asp-for="DepartingState">Departing State</label>
+      <input asp-for="DepartingState" class="form-control col-md-8">
+    </div>
+    <div class="form-group">
+      <label asp-for="DestinationCity">Destination City</label>
+      <input asp-for="DestinationCity" class="form-control col-md-8">
+    </div>
 
-        <label asp-for="DepartingState"></label>
-        <input asp-for="DepartingState">
+    <div class="form-group">
+      <label asp-for="DestinationState">Destination State</label>
+      <input asp-for="DestinationState" class="form-control col-md-8">
+    </div>
 
-        <label asp-for="DestinationCity"></label>
-        <input asp-for="DestinationCity">
-
-        <label asp-for="DestinationState"></label>
-        <input asp-for="DestinationState">
-
-        <label asp-for="StartDateTime"></label>
-        <input asp-for="StartDateTime">
-
-        <input type="hidden" asp-for="DayId" value="">        
-    </form>
+    <div class="form-group">
+      <label asp-for="StartDateTime">Start Date</label>
+      <input asp-for="StartDateTime" class="form-control col-md-8">
+    </div>
+    <input type="hidden" asp-for="DayId" value="">
+    <input type="submit" class="btn btn-success" value="Add Road Trip">
+</form>

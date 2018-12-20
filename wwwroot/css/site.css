@@ -30,12 +30,19 @@
 }
 body{
   background-image: url("../img/1.jpg");
+  background-repeat:no-repeat;
   background-size: cover;
   color:black;
 }
 .jumbotron{
   margin-top: 5%;
   background: none
+}
+
+.jumbotron button:hover
+{
+  color:black;
+  background-color: rgb(106, 189, 106);
 }
 .nav a{
   color:white;
@@ -45,10 +52,11 @@ body{
 .nav a:hover
 {
   color:black;
-  background-color: white;
+  background-color: rgb(106, 189, 106);
 }
 .nav {
   margin-bottom: 2%;
+  margin-top: 3%;
 }
 .trip
 {
@@ -59,4 +67,35 @@ body{
 .trip a{
   text-decoration: none;
   color:black;
+}
+.trip a:hover
+{
+  color: rgb(106, 189, 106);
+}
+.days
+{
+  border-left: 5px solid rgb(106, 189, 106);
+  margin-top:20px;
+  font-family:Lucida Console, Monaco, monospace;
+  font-size: 50px;
+  padding: 15px;
+
+}
+.days a{
+  text-decoration: none;
+  color:black;
+}
+.days a:hover
+{
+  color: rgb(106, 189, 106);
+}
+.alldays
+{
+  margin-top: 3%;
+}
+.activity
+{
+  border-bottom: 0.5px solid rgb(106, 189, 106);
+
+  padding-bottom:5px;
 }

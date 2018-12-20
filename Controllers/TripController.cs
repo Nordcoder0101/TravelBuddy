@@ -36,11 +36,17 @@ namespace TravelBuddy.Controllers
       return View(DashboardInfo);
     }
 
-    [HttpGet("showcreatetrip")]
-    public IActionResult ShowCreateTrip()
+    [HttpGet("showcreate/{action}")]
+    public IActionResult ShowCreate(string action)
     {
-      return PartialView("_ShowCreateTrip");
+      return PartialView($"_ShowCreate{action}");
     }
+    [HttpGet("showcreateactivity")]
+    public IActionResult ShowCreateActivity()
+    {
+      return PartialView("_ShowCreateActivity");
+    }
+
 
 
     [HttpPost("createtrip")]

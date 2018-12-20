@@ -25,13 +25,11 @@ namespace TravelBuddy.Controllers
     
       List<Day> AllDaysInTrip = dbContext.Days
       .Where(d => d.TripId == id)
-      .Include(d => d.Flights)
-      .Include(d => d.RoadTrips)
       .ToList();
 
 
 
-      return View();
+      return View("_ShowDays",AllDaysInTrip);
     }
 
     [HttpGet("getcitystate/{id}")]

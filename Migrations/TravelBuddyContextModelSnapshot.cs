@@ -204,7 +204,7 @@ namespace TravelBuddy.Migrations
 
             modelBuilder.Entity("TravelBuddy.Models.Flight", b =>
                 {
-                    b.HasOne("TravelBuddy.Models.Day")
+                    b.HasOne("TravelBuddy.Models.Day", "DayOfFlight")
                         .WithMany("Flights")
                         .HasForeignKey("DayId")
                         .OnDelete(DeleteBehavior.Cascade);

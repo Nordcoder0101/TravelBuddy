@@ -3,11 +3,13 @@ function getCityState(id){
   $.ajax({
     url: `/getcitystate/${id}`,
     method: "get"
-  }).done(function(response) {
-    // for (var i = 0; i < response.length; i++){
-      console.log(response)
+  }).done(function(response){
+    console.log(response)
+    // for (var i = 0; i < response["allDaysInTrip"].length; i++){
+    //   console.log(response["allDaysInTrip"][i])
     
-  })
+    }
+  )
 }
 
 function getLatLong(city, state){
@@ -26,7 +28,12 @@ $(document).ready(function(){
       method: "get"
     }).done(function(response){
       $(".rtform").html(response);
-  })
+    })
   
   })
+  $(document).on('click', ".click", function(){
+    console.log('click')
+    getCityState(1)
+  })
 })
+

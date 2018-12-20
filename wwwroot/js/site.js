@@ -13,8 +13,7 @@ $(document).ready(function(){
   })
 
 
-  function GetPartial(){
-    var data =$(".add-trip").attr("data-event")
+
 
   $(document).on('click', ".CreateFlight", function(){
     var data = $(".createFlight").serialize();

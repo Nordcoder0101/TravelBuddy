@@ -7,6 +7,7 @@ using TravelBuddy.HelperModels;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using System.Data.Entity;
+using Newtonsoft.Json;
 
 namespace TravelBuddy.Controllers
 {
@@ -35,16 +36,67 @@ namespace TravelBuddy.Controllers
     [HttpGet("getcitystate/{id}")]
     public IActionResult GetCityState(int id)
     {
-      List<Day> AllDaysInTrip = dbContext.Days
-      .Where(d => d.TripId == id)
-      .Include(d => d.Flights)
-      .Include(d => d.RoadTrips)
+      // List<Flight> test = dbContext.Flights.Include(f => f.Day).ToList();
+
+      // List<Day> AllDaysInTrip = dbContext.Days
+      // .Include(a => a.Flights)
+      // .Where(t => t.TripId == id)
+      // .ToList();
+
+      List<Day> DaysWithFlight = dbContext.Days
+      .Include(d => d.FlightsInDay).Where(d => d.TripId == id)
       .ToList();
 
-     var Response = new {
-        AllDaysInTrip = AllDaysInTrip,
-        test = "hello"
-      };
+      foreach(var d in DaysWithFlight)
+        foreach(var f in d.FlightsInDay)
+      {
+        System.Console.WriteLine($"<><><><><{f.ArrivalCity}><><><><><><<");
+      }
+      
+      List<Flight> AllFlights = dbContext.Flights
+        .Include(f => f.Day)
+        .Include(f => f.Day.Trip)
+        .Include(f => f.Day.Trip.User)
+        .Where(f => f.Day.Trip.TripId == id)
+        .ToList(); 
+      // // List<Flight> AllFlightsInTrip = new List<Flight>();
+
+      // foreach (var f in AllFlights)
+      // {
+      //   System.Console.WriteLine($"(*)(*)(*)>>>>>>>>>>>>>{f.DayId}<<<<<<<<<<<<<<<<<<<)(*)(*)(*)(*)(*)(*)");
+      // }
+
+      // foreach (var f in AllDaysInTrip)
+      // {
+      //   System.Console.WriteLine($"(*)(*)(*)(*)(*)(*)(*)(*)(*)(*){f.DayId}(*)(*)(*)(*)(*)(*)(*)");
+      // }
+
+
+    // foreach(var d in AllDaysInTrip)
+    // {
+    //   foreach(var f in AllFlights)
+    //   {
+    //       if (d.DayId == f.DayId)
+    //       {
+    //         AllFlightsInTrip.Add(f);
+    //       }
+    //   }
+      
+    // }
+
+      // var Response = new {
+        // allDaysInTrip = AllDaysInTrip
+      //  allFlightsInTrip = AllFlightsInTrip
+    //  };
+
+      // var Response = JsonConvert.SerializeObject(AllDaysInTrip, Formatting.Indented,
+      //   new JsonSerializerSettings
+      //   {
+      //     ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+      //   });
+     
+     var Response = DaysWithFlight;
+    // var Response = AllDaysInTrip;
 
       return Json(Response);
     }

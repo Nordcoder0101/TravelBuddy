@@ -22,10 +22,6 @@ namespace TravelBuddy.Migrations
                     b.Property<int>("ActivityId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CreatorId");
-
-                    b.Property<string>("CreatorName");
-
                     b.Property<DateTime>("Date");
 
                     b.Property<string>("Description")
@@ -33,6 +29,8 @@ namespace TravelBuddy.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired();
+
+                    b.Property<int>("TripId");
 
                     b.HasKey("ActivityId");
 
@@ -90,10 +88,14 @@ namespace TravelBuddy.Migrations
                     b.Property<string>("ArrivalCity")
                         .IsRequired();
 
+                    b.Property<string>("ArrivalState");
+
                     b.Property<int>("DayId");
 
                     b.Property<string>("DepartingCity")
                         .IsRequired();
+
+                    b.Property<string>("DepartingState");
 
                     b.Property<DateTime>("Departure");
 
@@ -117,13 +119,17 @@ namespace TravelBuddy.Migrations
 
                     b.Property<int>("DayId");
 
-                    b.Property<string>("Destination")
+                    b.Property<string>("DepartingCity")
                         .IsRequired();
+
+                    b.Property<string>("DepartingState");
+
+                    b.Property<string>("DestinationCity")
+                        .IsRequired();
+
+                    b.Property<string>("DestinationState");
 
                     b.Property<DateTime>("StartDateTime");
-
-                    b.Property<string>("StartingPoint")
-                        .IsRequired();
 
                     b.Property<int?>("TripId");
 

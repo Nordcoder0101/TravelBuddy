@@ -1,4 +1,5 @@
 function getCityState(id){
+  
   $.ajax({
     url: `/getcitystate/${id}`,
     method: "get"

@@ -19,15 +19,19 @@ namespace TravelBuddy.Controllers
 
     }
 
-    [HttpGet("showcreateflight")]
-    public IActionResult ShowCreateFlight()
+    [HttpGet("showcreateflight/{id}")]
+    public IActionResult ShowCreateFlight(string id)
     {
-      return PartialView("_ShowCreateFlight");
+      return PartialView($"_ShowCreate{id}");
     }
 
     [HttpPost("createflight")]
     public IActionResult CreateFlight(Flight NewFlight)
     {
+      System.Console.WriteLine(">>>>>>>>>>>HERE<<<<<<<<<<<<<");
+      dbContext.Add(NewFlight);
+      dbContext.SaveChanges();
+
       return Json(NewFlight);
     }
   }

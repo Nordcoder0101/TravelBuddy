@@ -24,8 +24,8 @@ namespace TravelBuddy.Models
     public string ArrivalCity {get;set;}
     public string ArrivalState { get; set; }
     
+    
     public int DayId {get;set;}
-    public Day DayOfFlight {get;set;}
     public Flight(){}
     
   }

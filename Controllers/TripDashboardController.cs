@@ -39,26 +39,36 @@ namespace TravelBuddy.Controllers
       // List<Flight> test = dbContext.Flights.Include(f => f.Day).ToList();
 
       // List<Day> AllDaysInTrip = dbContext.Days
-      // .Include(a => a.Flights)
+      // .Include(a => a.FlightsInDay)
       // .Where(t => t.TripId == id)
       // .ToList();
 
       List<Day> DaysWithFlight = dbContext.Days
-      .Include(d => d.FlightsInDay).Where(d => d.TripId == id)
+      .Include(f => f.FlightsInDay)
+      .Where(d => d.TripId == id)
       .ToList();
 
-      foreach(var d in DaysWithFlight)
-        foreach(var f in d.FlightsInDay)
-      {
-        System.Console.WriteLine($"<><><><><{f.ArrivalCity}><><><><><><<");
-      }
+      // List<Day> DaysAndFlights = (from d in dbContext.Days
+        
+      //                             where d.TripId == id
+      //                             select d)
+      //                             .Include("FlightsInDay")
+      //                             .ToList();
+
+      // System.Console.WriteLine($"{DaysWithFlight.Count}");
+      // foreach(Day d in DaysWithFlight)
+      // {
+
+      //   System.Console.WriteLine($"><><><><><<><>{d.DayId}{d.FlightsInDay.Count}<><><><><><><><><><");
+       
+      // }
       
-      List<Flight> AllFlights = dbContext.Flights
-        .Include(f => f.Day)
-        .Include(f => f.Day.Trip)
-        .Include(f => f.Day.Trip.User)
-        .Where(f => f.Day.Trip.TripId == id)
-        .ToList(); 
+      // List<Flight> AllFlights = dbContext.Flights
+      //   .Include(f => f.Day)
+      //   .Include(f => f.Day.Trip)
+      //   .Include(f => f.Day.Trip.User)
+      //   // .Where(f => f.Day.Trip.TripId == id)
+      //   .ToList(); 
       // // List<Flight> AllFlightsInTrip = new List<Flight>();
 
       // foreach (var f in AllFlights)

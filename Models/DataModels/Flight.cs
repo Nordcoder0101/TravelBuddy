@@ -17,6 +17,7 @@ namespace TravelBuddy.Models
     public string DepartingState { get; set; }
     public string ArrivalCity {get;set;}
     public string ArrivalState { get; set; }
+    [ForeignKey("Day")]
     public int DayId {get;set;}
 
     // --- nav properties --- //

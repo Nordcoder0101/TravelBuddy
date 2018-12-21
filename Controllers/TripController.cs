@@ -60,7 +60,7 @@ namespace TravelBuddy.Controllers
       if (ModelState.IsValid)
       {
         System.Console.WriteLine($@"
-          >>>>>>
+          >>>>>>>>>
           {NewTripDashboard.UserId}
           {NewTripDashboard.TripName}
           {NewTripDashboard.StartDate}

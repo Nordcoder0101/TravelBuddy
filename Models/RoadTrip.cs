@@ -10,9 +10,11 @@ namespace TravelBuddy.Models
     [Key]
     public int DriveId { get; set; }
     [Required]
-    public string StartingPoint {get;set;}
+    public string DepartingCity {get;set;}
+    public string DepartingState { get; set; }
     [Required]
-    public string Destination {get;set;}
+    public string DestinationCity {get;set;}
+    public string DestinationState {get;set;}
     public DateTime StartDateTime {get;set;}
     public int DayId {get;set;}
     public RoadTrip(){}

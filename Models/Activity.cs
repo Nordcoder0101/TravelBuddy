@@ -17,8 +17,7 @@ namespace TravelBuddy.Models
     [Required]
     [MinLength(10)]
     public string Description { get; set; }
-    public int CreatorId { get; set; }
-    public string CreatorName { get; set; }  
+    public int TripId {get;set;}
     public List<ActivityAndDay> ActivityAndDays { get; set; }
 
   }

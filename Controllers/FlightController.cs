@@ -19,16 +19,31 @@ namespace TravelBuddy.Controllers
 
     }
 
-    [HttpGet("showcreateflight")]
-    public IActionResult ShowCreateFlight()
+    [HttpGet("showcreateflight/{id}")]
+    public IActionResult ShowCreateFlight(string id)
     {
-      return PartialView("_ShowCreateFlight");
+      return PartialView($"_ShowCreate{id}");
     }
 
     [HttpPost("createflight")]
-    public IActionResult CreateFlight(Flight NewFlight)
+    public IActionResult CreateFlight(FlightValidation newFlight)
     {
-      return Json(NewFlight);
+      if (ModelState.IsValid)
+      {
+        Flight createNew = new Flight();
+        createNew.Arrival = newFlight.Arrival;
+        createNew.ArrivalCity = newFlight.ArrivalCity;
+
+        System.Console.WriteLine(">>>>>>>>>>>HERE<<<<<<<<<<<<<");
+        dbContext.Add(createNew);
+        dbContext.SaveChanges();
+        return Json(createNew);
+      }
+      else
+      {
+        return View();
+      }
+
     }
   }
 }

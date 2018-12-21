@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  
   $(".addFlightForm").click(function(){
     $(".addFlight").show();
     console.log("clicked")
@@ -13,30 +12,47 @@ $(document).ready(function(){
     })
   })
 
-  $(".addTripForm").click(function () {
-    $(".addTrip").show();
+
+
+  $(".add").click(function(){
+    var data=$(this).attr("data-event")
     console.log("clicked")
     $.ajax({
-      url: "/showcreatetrip",
+      url: `/showcreate/${data}`,
       method: "get"
-    }).done(function (response) {
+    }).done(function(response){
       console.log(response)
-      $(".addTrip").html(response)
-      $(".addTripForm").hide();
+      $(".modal-body").html(response)
+      $('#exampleModalCenter').modal()
+    })
+  return false;
+})
+
+  $(document).on('click', ".CreateFlight", function(){
+    var data = $(".createFlight").serialize();
+    $.ajax({
+      url: "createflight",
+      method: "post",
+      data: data,
+
+    }).done(function(response){
+      console.log(response)
     })
   })
 
   $(document).on('click', ".submit-trip", function(){
-    console.log("click")
-    var data = $(".createTrip").serialize();
     
+    var data = $(".createTrip").serialize();
+    console.log(data)
     $.ajax({
       url: "/createtrip",
       method: "post",
       data: data,
     }).done(function(response){
       console.log(response)
-      
+      $(".addTrip").hide();
+      $(".addTripForm").show()
+      location.reload("../../Views/Trip/UserDashboard.cshtml" );
 
     })
   })

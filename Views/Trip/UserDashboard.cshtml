@@ -1,0 +1,67 @@
+@using TravelBuddy.HelperModels
+@model UserDashboard
+
+    <partial name="../menu"/>
+
+<div class="jumbotron">
+  <h2 class="display-4">Welcome @Model.UserName to the Trip Planner!</h2>
+  <p class="lead">This is a simple app that allows user to add activities (Trips ,Flights ,etc) and track them.</p>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="collapse" data-target="#collapseExample">Get Started</button>
+</div>
+<div id="collapseExample" class="collapse addTrip">
+  <form class="form-inline" asp-action="createtrip" method="POST" asp-controller="Trip">
+    <label style="font-weight:bold"> Trip Name </label>
+    <input type="text" class="form-control mb-2 mr-sm-2" asp-for="TripName">
+    
+    <label style="font-weight:bold">Start Date</label>
+    <input type="date" class="form-control mb-2 mr-sm-2" asp-for="StartDate">
+
+    <label style="font-weight:bold">End Date</label>
+    <input type="date" class="form-control mb-2 mr-sm-2" asp-for="EndDate">
+    <input type="submit" class="btn btn-info mb-2" value="Add Trip">
+  </form>
+
+</div>
+
+
+@if(@Model.AllTrips!= null)
+{ 
+  <div class="row">
+  @foreach(var trip in @Model.AllTrips)
+  {
+    <div class="col-sm-4">
+    <div class="card">
+        <div class="card-header">
+        <h4 class="card-title">@trip.TripName</h4>      
+        </div>
+      <div class="card-body">
+        <p class="card-text"><span class="date">Start Date : </span>@trip.StartDate.ToString("ddd, dd MMMM yyyy")</p>
+        <p class="card-text"><span class="date">End Date :</span> @trip.EndDate.ToString("ddd, dd MMMM yyyy")</p>
+        <a href="/showdays/@trip.TripId" class="btn btn-info">View Trip</a>
+        <a href="/delete/@trip.TripId" class="btn btn-danger">Delete</a>
+
+      </div>
+    </div>
+  </div>
+  }
+  </div>
+}
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<script>
+window.onscroll = function() {scrollFunction()};s
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("myBtn").style.display = "block";
+  } else {
+    document.getElementById("myBtn").style.display = "none";
+  }
+}
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+<partial name="../footer"/>
+

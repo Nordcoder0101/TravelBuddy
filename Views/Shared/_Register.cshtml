@@ -1,33 +1,33 @@
 @using TravelBuddy.Models
-@model User
-
-<h1 class="LoginHeader">Register to the Activity Planner!</h1>
-<a class="login" href="/ViewLoginUser">Login</a>
-<div class = "form-container">
-  <div class="left-login">
-    <form class="form" method="post" asp-action="RegisterUser" asp-controller="LoginReg">
-      <label asp-for="FirstName">First Name</label>
-      <input asp-for="FirstName">
-      <span asp-validation-for="FirstName"></span>
-
-      <label asp-for="LastName">Last Name</label>
-      <input asp-for="LastName">
-      <span asp-validation-for="LastName"></span>
-
-      <label asp-for="Email">Email Name</label>
-      <input asp-for="Email">
-      <span asp-validation-for="Email"></span>
-      <input type="submit" value="Sign Up Now" class="btn btn-primary submit">
+@model UserValidation
+    <form class="form-horizontal" method="post" asp-action="RegisterUser" asp-controller="LoginReg" class="form-horizontal">
+    <h3 class="LoginHeader">Register Here!</h3>    
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control col-md-8" aria-describedby="emailHelp">
+        <span asp-validation-for="FirstName" class="alert-danger" role="alert"></span>
     </div>
-  <div class="right-login">
-      <label asp-for="Password">Password</label>
-      <input asp-for="Password">
-      <span asp-validation-for="Password"></span>
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+          <input asp-for="LastName" class="form-control col-md-8" aria-describedby="emailHelp">
+          <span asp-validation-for="LastName" class="alert-danger" role="alert"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control col-md-8" aria-describedby="emailHelp">
+        <span asp-validation-for="Email" class="alert-danger" role="alert"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control col-md-8" aria-describedby="emailHelp">
+        <span asp-validation-for="Password" class="alert-danger" role="alert"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Confirm"></label>
+        <input asp-for="Confirm" class="form-control col-md-8" aria-describedby="emailHelp">
+        <span asp-validation-for="Confirm" class="alert-danger" role="alert"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Register</button>
 
-      <label asp-for="Confirm">Confirm</label>
-      <input asp-for="Confirm">
-    <span asp-validation-for="Confirm"></span>
   </form>
-  </div>
-</div>
 

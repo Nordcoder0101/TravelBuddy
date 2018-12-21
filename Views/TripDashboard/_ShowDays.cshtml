@@ -1,0 +1,56 @@
+@using TravelBuddy.Models
+@model List<Day>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="~/js/tripdashboard.js" asp-append-version="true"></script>
+
+    <partial name="../menu"/>
+    <span class="click">Click</span>
+<div class="alldays">
+    @if(@Model!=null)
+    {
+        for(var i=1; i<@Model.Count+1; i++){
+            <h3 class="days"><a data-toggle="collapse" href="#collapseExample-@i" role="button" aria-expanded="false" aria-controls="collapseExample-@i">DAY @i</a></h3>;
+            <div class="collapse activity" id="collapseExample-@i">
+                <a data-event="Activity" class="btn btn-info add" href="">Add Activity</a>
+                <a data-event="Flight" class="btn btn-info add" href="">Add Flight</a>
+                <a data-event="RoadTrip" class="btn btn-info add" href="">Add Roadtrip</a>
+            </div>;
+        }
+    }
+</div>
+<div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+    
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<partial name="../footer"/>
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<script>
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("myBtn").style.display = "block";
+  } else {
+    document.getElementById("myBtn").style.display = "none";
+  }
+}
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>

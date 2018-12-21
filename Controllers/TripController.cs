@@ -82,8 +82,6 @@ namespace TravelBuddy.Controllers
         var DayToAdd = NewTrip.StartDate;
         var DayOfWeek = DayToAdd.DayOfWeek.ToString();
 
-        
-
 
         for (int i = 0; i <= NumDays; i++)
         {
@@ -109,6 +107,16 @@ namespace TravelBuddy.Controllers
     {
       return PartialView("_ShowCreateRoadTrip");
     }
+
+    [HttpGet("delete/{id}")]
+    public IActionResult DeleteTrip(int id)
+    {
+      var OneTrip = dbContext.Trips.FirstOrDefault(a=>a.TripId==id);
+      dbContext.Remove(OneTrip);
+      dbContext.SaveChanges();
+      return RedirectToAction("UserDashboard");
+    }
+
 
   }
 }

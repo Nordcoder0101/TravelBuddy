@@ -2,14 +2,11 @@ function getCityState(id){
   
   $.ajax({
     url: `/getcitystate/${id}`,
-    method: "get"
-  }).done(function(response){
-    console.log(response)
-    // for (var i = 0; i < response["allDaysInTrip"].length; i++){
-    //   console.log(response["allDaysInTrip"][i])
-    
+    method: "get",
+    success: function(res) {
+      console.log("balls");
     }
-  )
+  })
 }
 
 function getLatLong(city, state){

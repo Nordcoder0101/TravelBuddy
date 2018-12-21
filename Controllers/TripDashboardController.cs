@@ -6,8 +6,8 @@ using TravelBuddy.Models;
 using TravelBuddy.HelperModels;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
-using System.Data.Entity;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace TravelBuddy.Controllers
 {
@@ -24,79 +24,35 @@ namespace TravelBuddy.Controllers
     public IActionResult TripDashboard(int id)
     {
     
-      List<Day> AllDaysInTrip = dbContext.Days
-      .Where(d => d.TripId == id)
+      List<Day> AllDaysInTrip = dbContext.days
+      .Where(d => d.trip_id == id)
       .ToList();
-
-
 
       return View("_ShowDays",AllDaysInTrip);
     }
 
     [HttpGet("getcitystate/{id}")]
-    public IActionResult GetCityState(int id)
+    public JsonResult GetCityState(int id)
     {
-      // List<Flight> test = dbContext.Flights.Include(f => f.Day).ToList();
+      // List<Flight> AllFlights = dbContext.flights.ToList(); 
+      List<Day> AllDays = dbContext.days
+        .Include(d => d.FlightsInDay)
+        .ToList();
 
-      // List<Day> AllDaysInTrip = dbContext.Days
-      // .Include(a => a.Flights)
-      // .Where(t => t.TripId == id)
-      // .ToList();
+      var Response = AllDays;
 
-      List<Day> DaysWithFlight = dbContext.Days
-      .Include(d => d.FlightsInDay).Where(d => d.TripId == id)
-      .ToList();
-
-      foreach(var d in DaysWithFlight)
-        foreach(var f in d.FlightsInDay)
+      System.Console.WriteLine("================");
+      foreach(Day day in AllDays)
       {
-        System.Console.WriteLine($"<><><><><{f.ArrivalCity}><><><><><><<");
+        System.Console.WriteLine(day.date);
+        System.Console.WriteLine(day.FlightsInDay);
+        foreach(Flight flight in day.FlightsInDay)
+        {
+          System.Console.WriteLine(flight.airline_name);
+        }
       }
-      
-      List<Flight> AllFlights = dbContext.Flights
-        .Include(f => f.Day)
-        .Include(f => f.Day.Trip)
-        .Include(f => f.Day.Trip.User)
-        .Where(f => f.Day.Trip.TripId == id)
-        .ToList(); 
-      // // List<Flight> AllFlightsInTrip = new List<Flight>();
-
-      // foreach (var f in AllFlights)
-      // {
-      //   System.Console.WriteLine($"(*)(*)(*)>>>>>>>>>>>>>{f.DayId}<<<<<<<<<<<<<<<<<<<)(*)(*)(*)(*)(*)(*)");
-      // }
-
-      // foreach (var f in AllDaysInTrip)
-      // {
-      //   System.Console.WriteLine($"(*)(*)(*)(*)(*)(*)(*)(*)(*)(*){f.DayId}(*)(*)(*)(*)(*)(*)(*)");
-      // }
-
-
-    // foreach(var d in AllDaysInTrip)
-    // {
-    //   foreach(var f in AllFlights)
-    //   {
-    //       if (d.DayId == f.DayId)
-    //       {
-    //         AllFlightsInTrip.Add(f);
-    //       }
-    //   }
-      
-    // }
-
-      // var Response = new {
-        // allDaysInTrip = AllDaysInTrip
-      //  allFlightsInTrip = AllFlightsInTrip
-    //  };
-
-      // var Response = JsonConvert.SerializeObject(AllDaysInTrip, Formatting.Indented,
-      //   new JsonSerializerSettings
-      //   {
-      //     ReferenceLoopHandling = ReferenceLoopHandling.Serialize
-      //   });
-     
-     var Response = DaysWithFlight;
-    // var Response = AllDaysInTrip;
+      System.Console.WriteLine("================");
+      System.Console.WriteLine(Response);
 
       return Json(Response);
     }

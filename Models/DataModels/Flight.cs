@@ -8,16 +8,16 @@ namespace TravelBuddy.Models
   public class Flight
   {
     [Key]
-    public int FlightId { get; set; }
-    public string Airline {get; set;}
-    public string FlightNumber { get; set; }
-    public DateTime Departure {get;set;}
-    public DateTime Arrival {get;set;}
-    public string DepartingCity {get;set;}
-    public string DepartingState { get; set; }
-    public string ArrivalCity {get;set;}
-    public string ArrivalState { get; set; }
-    public int DayId {get;set;}
+    public int flight_id { get; set; }
+    public int day_id {get;set;}
+    public string airline_name {get; set;}
+    public string flight_number { get; set; }
+    public DateTime departure_date {get;set;}
+    public DateTime arrival_date {get;set;}
+    public string departing_city {get;set;}
+    public string departing_state { get; set; }
+    public string arrival_city {get;set;}
+    public string arrival_state { get; set; }
 
     // --- nav properties --- //
     public Day Day {get;set;}

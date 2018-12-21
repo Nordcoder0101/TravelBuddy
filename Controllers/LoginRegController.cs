@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 using TravelBuddy.Models;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
-using System.Data.Entity;
 
 namespace TravelBuddy.Controllers
 {
@@ -29,24 +28,30 @@ namespace TravelBuddy.Controllers
 
 
     [HttpPost("RegisterUser")]
-    public IActionResult RegisterUser(User user)
+    public IActionResult RegisterUser(UserValidation user)
     {
       if (ModelState.IsValid)
       {
-        if (dbContext.Users.Any(u => u.Email == user.Email))
+        if (dbContext.users.Any(u => u.email == user.Email))
         {
           ModelState.AddModelError("Email", "Email already in use!");
           return View("Login");
         }
         else
         {
-          PasswordHasher<User> Hasher = new PasswordHasher<User>();
-          user.Password = Hasher.HashPassword(user, user.Password);
+          User newUser = new User();
+          newUser.first_name = user.FirstName;
+          newUser.last_name = user.LastName;
+          newUser.email = user.Email;
 
-          dbContext.Add(user);
+          PasswordHasher<User> Hasher = new PasswordHasher<User>();
+          newUser.password = Hasher.HashPassword(newUser, user.Password);
+
+          dbContext.Add(newUser);
           dbContext.SaveChanges();
-          var AddedUser = dbContext.Users.FirstOrDefault(u => u.Email == user.Email);
-          HttpContext.Session.SetInt32("UserId", AddedUser.UserId);
+
+          var AddedUser = dbContext.users.FirstOrDefault(u => u.email == user.Email);
+          HttpContext.Session.SetInt32("UserId", AddedUser.user_id);
           int? LoggedInUserId = HttpContext.Session.GetInt32("UserId");
 
           return RedirectToAction("UserDashboard", "Trip");
@@ -69,7 +74,7 @@ namespace TravelBuddy.Controllers
     {
       if (ModelState.IsValid)
       {
-        var UserToCheck = dbContext.Users.FirstOrDefault(u => u.Email == UserSubmission.LoginEmail);
+        var UserToCheck = dbContext.users.FirstOrDefault(u => u.email == UserSubmission.LoginEmail);
         if (UserToCheck == null)
         {
           ModelState.AddModelError("LoginEmail", "Invalid Email or Password");
@@ -77,14 +82,14 @@ namespace TravelBuddy.Controllers
         }
         var hasher = new PasswordHasher<LoginUser>();
 
-        var result = hasher.VerifyHashedPassword(UserSubmission, UserToCheck.Password, UserSubmission.LoginPassword);
+        var result = hasher.VerifyHashedPassword(UserSubmission, UserToCheck.password, UserSubmission.LoginPassword);
 
         if (result == 0)
         {
           ModelState.AddModelError("LoginPassword", "Invalid Email or Password");
           return View("login");
         }
-        HttpContext.Session.SetInt32("UserId", UserToCheck.UserId);
+        HttpContext.Session.SetInt32("UserId", UserToCheck.user_id);
         int? LoggedInUserId = HttpContext.Session.GetInt32("UserId");
         return RedirectToAction("UserDashboard", "Trip");
       }

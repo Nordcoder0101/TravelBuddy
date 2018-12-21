@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 using TravelBuddy.Models;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
-using System.Data.Entity;
 
 namespace TravelBuddy.Controllers
 {
@@ -31,8 +30,14 @@ namespace TravelBuddy.Controllers
       if (ModelState.IsValid)
       {
         Flight createNew = new Flight();
-        createNew.Arrival = newFlight.Arrival;
-        createNew.ArrivalCity = newFlight.ArrivalCity;
+        createNew.airline_name = newFlight.Airline;
+        createNew.arrival_date = newFlight.Arrival;
+        createNew.arrival_city = newFlight.ArrivalCity;
+        createNew.departing_state = newFlight.DepartingState;
+        createNew.departing_city = newFlight.DepartingCity;
+        createNew.arrival_city = newFlight.ArrivalCity;
+        createNew.arrival_city = newFlight.ArrivalCity;
+        
 
         System.Console.WriteLine(">>>>>>>>>>>HERE<<<<<<<<<<<<<");
         dbContext.Add(createNew);

@@ -32,13 +32,13 @@
     <div class="col-sm-4">
     <div class="card">
         <div class="card-header">
-        <h4 class="card-title">@trip.TripName</h4>      
+        <h4 class="card-title">@trip.name</h4>      
         </div>
       <div class="card-body">
-        <p class="card-text"><span class="date">Start Date : </span>@trip.StartDate.ToString("ddd, dd MMMM yyyy")</p>
-        <p class="card-text"><span class="date">End Date :</span> @trip.EndDate.ToString("ddd, dd MMMM yyyy")</p>
-        <a href="/showdays/@trip.TripId" class="btn btn-info">View Trip</a>
-        <a href="/delete/@trip.TripId" class="btn btn-danger">Delete</a>
+        <p class="card-text"><span class="date">Start Date : </span>@trip.start_date.ToString("ddd, dd MMMM yyyy")</p>
+        <p class="card-text"><span class="date">End Date :</span> @trip.end_date.ToString("ddd, dd MMMM yyyy")</p>
+        <a href="/showdays/@trip.trip_id" class="btn btn-info">View Trip</a>
+        <a href="/delete/@trip.trip_id" class="btn btn-danger">Delete</a>
 
       </div>
     </div>

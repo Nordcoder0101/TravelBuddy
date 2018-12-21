@@ -6,7 +6,6 @@ using TravelBuddy.Models;
 using TravelBuddy.HelperModels;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
-using System.Data.Entity;
 
 namespace TravelBuddy.Controllers
 {
@@ -27,11 +26,11 @@ namespace TravelBuddy.Controllers
         return Redirect("/");
       }
       int? LoggedInUserId = HttpContext.Session.GetInt32("UserId");
-      var LoggedInUser = dbContext.Users.FirstOrDefault(u => u.UserId == LoggedInUserId);
-      List<Trip> AllTrips = dbContext.Trips.Where(t => t.UserId == LoggedInUser.UserId).ToList();
+      var LoggedInUser = dbContext.users.FirstOrDefault(u => u.user_id == LoggedInUserId);
+      List<Trip> AllTrips = dbContext.trips.Where(t => t.user_id == LoggedInUser.user_id).ToList();
       
 
-      UserDashboard DashboardInfo = new UserDashboard(LoggedInUser.UserId, LoggedInUser.FirstName, AllTrips);
+      UserDashboard DashboardInfo = new UserDashboard(LoggedInUser.user_id, LoggedInUser.first_name, AllTrips);
       System.Console.WriteLine($"<<<<<<>>>>>>>>>>>{DashboardInfo.UserName}, {DashboardInfo.EndDate}, {DashboardInfo.UserId}, {DashboardInfo.TripName}><><><><><><><><><>><><><><><>");
       return View(DashboardInfo);
     }
@@ -55,7 +54,7 @@ namespace TravelBuddy.Controllers
       {
         
       int? LoggedInUserId = HttpContext.Session.GetInt32("UserId");
-      var LoggedInUser = dbContext.Users.FirstOrDefault(u => u.UserId == LoggedInUserId);
+      var LoggedInUser = dbContext.users.FirstOrDefault(u => u.user_id == LoggedInUserId);
 
       if (ModelState.IsValid)
       {
@@ -68,27 +67,26 @@ namespace TravelBuddy.Controllers
           <<<<<<<<<");
 
         Trip NewTrip = new Trip();
-        NewTrip.UserId = LoggedInUser.UserId;
-        NewTrip.TripName = NewTripDashboard.TripName;
-        NewTrip.StartDate = NewTripDashboard.StartDate;
-        NewTrip.EndDate = NewTripDashboard.EndDate;
+        NewTrip.user_id = LoggedInUser.user_id;
+        NewTrip.name = NewTripDashboard.TripName;
+        NewTrip.start_date = NewTripDashboard.StartDate;
+        NewTrip.end_date = NewTripDashboard.EndDate;
 
         dbContext.Add(NewTrip);
         dbContext.SaveChanges();
 
-        var TripToAddToDay = dbContext.Trips.FirstOrDefault(t => t.TripName == NewTrip.TripName);
+        var TripToAddToDay = dbContext.trips.FirstOrDefault(t => t.name == NewTrip.name);
 
-        var NumDays = (NewTrip.EndDate - NewTrip.StartDate).TotalDays;
-        var DayToAdd = NewTrip.StartDate;
+        var NumDays = (NewTrip.end_date - NewTrip.start_date).TotalDays;
+        var DayToAdd = NewTrip.start_date;
         var DayOfWeek = DayToAdd.DayOfWeek.ToString();
 
 
         for (int i = 0; i <= NumDays; i++)
         {
           Day NewDay = new Day();
-          NewDay.TheDay = DayToAdd;
-          NewDay.DayOfTheWeek = DayOfWeek;
-          NewDay.TripId = TripToAddToDay.TripId;
+          NewDay.date = DayToAdd;
+          NewDay.trip_id = TripToAddToDay.trip_id;
 
           dbContext.Add(NewDay);
           dbContext.SaveChanges();
@@ -111,7 +109,7 @@ namespace TravelBuddy.Controllers
     [HttpGet("delete/{id}")]
     public IActionResult DeleteTrip(int id)
     {
-      var OneTrip = dbContext.Trips.FirstOrDefault(a=>a.TripId==id);
+      var OneTrip = dbContext.trips.FirstOrDefault(a=>a.trip_id==id);
       dbContext.Remove(OneTrip);
       dbContext.SaveChanges();
       return RedirectToAction("UserDashboard");
